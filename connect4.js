@@ -54,7 +54,7 @@ class Game {
 
   findSpotForCol(x) {
     for (let y = this.height - 1; y >= 0; y--) {
-      if (!board[y][x]) {
+      if (!this.board[y][x]) {
         return y;
       }
     }
@@ -79,7 +79,7 @@ class Game {
     // get x from ID of clicked cell
     // TODO:
     const x = Number(evt.target.id.split("-").pop());
-
+    console.log("x=", x);
     // get next spot in column (if none, ignore click)
     const y = findSpotForCol(x);
     if (y === null) {
@@ -137,8 +137,8 @@ class Game {
     }
   }
 
-  makeBoard();
-  makeHtmlBoard();
+  //makeBoard()
+  //makeHtmlBoard()
 
 }
 
