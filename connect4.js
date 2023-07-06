@@ -12,9 +12,13 @@ class Game {
     this.width = width;
     this.height = height;
     this.board = [];
+    this.currPlayer = 1;
+
+    makeBoard();
+
+    this.makeHtmlBoard = makeHtmlBoard();
   }
 
-  currPlayer = 1;
 
   makeBoard() {
     for (let y = 0; y < this.height; y++) {
@@ -28,7 +32,7 @@ class Game {
     // make column tops (clickable area for adding a piece to that column)
     const top = document.createElement('tr');
     top.setAttribute('id', 'column-top');
-    top.addEventListener('click', handleClick);
+    top.addEventListener('click', handleClick); //add bind
 
     for (let x = 0; x < this.width; x++) {
       const headCell = document.createElement('td');
@@ -137,12 +141,10 @@ class Game {
     }
   }
 
-  //makeBoard()
-  //makeHtmlBoard()
 
 }
 
-new Game(6,7);
+new Game(6, 7);
 
 
 // const WIDTH = 7;
