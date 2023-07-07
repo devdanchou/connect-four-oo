@@ -8,7 +8,7 @@
 
 class Game {
 
-  constructor(width, height) {
+  constructor(height, width) {
     this.width = width;
     this.height = height;
     this.board = [];
@@ -30,12 +30,13 @@ class Game {
     // make column tops (clickable area for adding a piece to that column)
     const top = document.createElement('tr');
     top.setAttribute('id', 'column-top');
-    top.addEventListener('click', this.handleClick.bind(this));
+    top.addEventListener('click', this.handleClick.bind(this)); //add bind
 
     for (let x = 0; x < this.width; x++) {
       const headCell = document.createElement('td');
       headCell.setAttribute('id', x);
       top.append(headCell);
+
     }
 
     board.append(top);
@@ -67,6 +68,7 @@ class Game {
     const piece = document.createElement('div');
     piece.classList.add('piece');
     piece.classList.add(`p${this.currPlayer}`);
+    console.log({piece});
     piece.style.top = -50 * (y + 2);
 
     const spot = document.getElementById(`c-${y}-${x}`);
@@ -84,22 +86,23 @@ class Game {
     console.log("x=", x);
     // get next spot in column (if none, ignore click)
     const y = this.findSpotForCol(x);
+    console.log({y});
     if (y === null) {
       return;
     }
 
     // place piece in board and add to HTML table
     this.board[y][x] = this.currPlayer;
-    placeInTable(y, x);
+    this.placeInTable(y, x);
 
     // check for win
-    if (checkForWin()) {
-      return endGame(`Player ${this.currPlayer} won!`);
+    if (this.checkForWin()) {
+      return this.endGame(`Player ${this.currPlayer} won!`);
     }
 
     // check for tie
     if (this.board.every(row => row.every(cell => cell))) {
-      return endGame('Tie!');
+      return this.endGame('Tie!');
     }
 
     // switch players
@@ -107,19 +110,21 @@ class Game {
   }
 
   checkForWin() {
-    function _win(cells) {
+    console.log("check for win", this);
+    let _win = (cells) => {
+      console.log("_win", this);
       // Check four cells to see if they're all color of current player
       //  - cells: list of four (y, x) cells
       //  - returns true if all are legal coordinates & all match currPlayer
 
-      return cells.every(
-        ([y, x]) =>
-          y >= 0 &&
+      return cells.every.bind(this) (
+        ([y, x]) => { console.log("every", this)
+        return y >= 0 &&
           y < this.height &&
           x >= 0 &&
           x < this.width &&
           this.board[y][x] === this.currPlayer
-      );
+        });
     }
 
     for (let y = 0; y < this.height; y++) {
