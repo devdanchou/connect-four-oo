@@ -68,7 +68,7 @@ class Game {
     const piece = document.createElement('div');
     piece.classList.add('piece');
     piece.classList.add(`p${this.currPlayer}`);
-    piece.style.top = -50 * (y + 2);
+    //piece.style.top = -50 * (y + 2);
 
     const spot = document.getElementById(`c-${y}-${x}`);
     spot.append(piece);
@@ -80,12 +80,10 @@ class Game {
 
   handleClick(evt) {
     // get x from ID of clicked cell
-    // TODO:
     const x = Number(evt.target.id);
     console.log("x=", x);
     // get next spot in column (if none, ignore click)
     const y = this.findSpotForCol(x);
-
     if (y === null) {
       return;
     }
