@@ -26,7 +26,7 @@ class Game {
 
   makeHtmlBoard() {
     const board = document.getElementById('board');
-
+    board.innerHTML = "";
     // make column tops (clickable area for adding a piece to that column)
     const top = document.createElement('tr');
     top.setAttribute('id', 'column-top');
