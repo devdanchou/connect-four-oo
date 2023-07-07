@@ -68,7 +68,6 @@ class Game {
     const piece = document.createElement('div');
     piece.classList.add('piece');
     piece.classList.add(`p${this.currPlayer}`);
-    console.log({piece});
     piece.style.top = -50 * (y + 2);
 
     const spot = document.getElementById(`c-${y}-${x}`);
@@ -86,7 +85,7 @@ class Game {
     console.log("x=", x);
     // get next spot in column (if none, ignore click)
     const y = this.findSpotForCol(x);
-    console.log({y});
+
     if (y === null) {
       return;
     }
@@ -117,7 +116,7 @@ class Game {
       //  - cells: list of four (y, x) cells
       //  - returns true if all are legal coordinates & all match currPlayer
 
-      return cells.every.bind(this) (
+      return cells.every(
         ([y, x]) => { console.log("every", this)
         return y >= 0 &&
           y < this.height &&
